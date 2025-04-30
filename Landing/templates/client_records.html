@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Records</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bold.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo.jpg' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #435ebe;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .no-records {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.jpg' %}" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_dashboard' %}" class="sidebar-link">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_recipe_list' %}" class="sidebar-link">
+                                <i class="fas fa-book-open"></i>
+                                <span>Recipe's</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_educontent_list' %}" class="sidebar-link">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Educational Content</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_bodymetric_view' %}" class="sidebar-link">
+                                <i class="fas fa-weight-scale"></i>
+                                <span>BodyMetrics</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item active">
+                            <a href="{% url 'client_records' %}" class="sidebar-link">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Records</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_logout' %}" class="sidebar-link">
+                                <i class="fas fa-door-open"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            <div class="page-heading">
+                <h3>Health Records</h3>
+                <p>Your personal health goals</p>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Health Goal Details</h4>
+                            </div>
+                            <div class="card-body">
+                                {% if health_goal %}
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Current Weight</th>
+                                            <td>{{ health_goal.current_weight }} kg</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Goal Weight</th>
+                                            <td>{{ health_goal.goal_weight }} kg</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Current Calories</th>
+                                            <td>{{ health_goal.current_calories }} kcal</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Goal Calories</th>
+                                            <td>{{ health_goal.goal_calories }} kcal</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Target Date</th>
+                                            <td>{{ health_goal.target_date|date:"d M Y" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Created At</th>
+                                            <td>{{ health_goal.created_at|date:"d M Y H:i" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Status</th>
+                                            <td>
+                                                {% if health_goal.has_active_goal %}
+                                                    <span class="badge bg-success">Active</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Expired</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                {% else %}
+                                    <p class="no-records">No health goals set yet.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 © School Project</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+</body>
+</html>

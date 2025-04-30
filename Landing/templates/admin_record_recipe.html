@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        
+        .logo img{
+            height: 100%;
+            position: relative;
+            width: 100%;
+        }
+        /* Delete button styling */
+.action-buttons .btn-delete {
+    background-color: #dc3545; /* Red */
+    color: antiquewhite;
+}
+
+.action-buttons .btn-delete:hover {
+    background-color: #a71d2a;
+    color: aliceblue;
+}
+
+        
+    </style>
+    <style>
+        
+        
+        #sed{
+            display: flex;
+            width: 100%;
+        }
+        .button_c{
+            width: 50%;
+        }
+        #cdf{
+            width: 50%;
+        }
+        /* Text strip container */
+.text-strip {
+  position: relative;
+  width: 100%;
+  background: #435ebe;
+  overflow: hidden;
+  border-top: 2px solid #435ebe;
+  border-bottom: 2px solid #435ebe;
+  padding: 10px 0;
+  margin-bottom: 25px;
+  border-radius: 12px;
+}
+
+/* Continuous scrolling effect */
+.text-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  animation: scroll 15s linear infinite;
+  white-space: nowrap;
+}
+
+/* Text items in the strip */
+.text-container span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Separator lines (vertical bars) */
+.text-container span:nth-child(odd) {
+  margin: 0 10px;
+}
+
+.text-container span:nth-child(even) {
+  color: #fff;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+/* Button container styling */
+.button_c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Button styling */
+.button_c button {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between icon and text */
+  background-color: #435ebe; /* Button background */
+  color: #ffffff; /* Button text color */
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button_c button i {
+  font-size: 18px; /* Icon size */
+}
+
+/* Hover effect */
+.button_c button:hover {
+  background-color: #435ebe;
+  box-shadow: 0 6px 10px rgba(0, 123, 92, 0.2);
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Focus styling */
+.button_c button:focus {
+  outline: 2px solid #435ebe;
+}
+
+/* Container for action buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Base styling for all buttons */
+.action-buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Edit button styling */
+.action-buttons .btn-edit {
+    background-color: #007bff; /* Blue */
+}
+
+.action-buttons .btn-edit:hover {
+    background-color: #0056b3;
+}
+
+/* View button styling */
+.action-buttons .btn-view {
+    background-color: #28a745; /* Green */
+}
+
+.action-buttons .btn-view:hover {
+    background-color: #1e7e34;
+}
+
+/* Delete button styling */
+.action-buttons .btn-delete {
+    background-color: #dc3545; /* Red */
+}
+
+.action-buttons .btn-delete:hover {
+    background-color: #a71d2a;
+}
+
+/* Optional: Add subtle shadow on hover */
+.action-buttons .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.tyt{
+    display: flex;
+    width: 100%;
+}
+.tyt .len{
+    font-size: 35px;
+}
+.len{
+    width: 50%;
+}
+.titl{
+    padding-top: 1.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1.5%;
+}
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.jpg' %}" class="tly" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                
+                        <li class="sidebar-item">
+                            <a href="{% url 'admin_home' %}" class="sidebar-link">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'admin_users_registered' %}" class="sidebar-link">
+                                <i class="fas fa-users"></i>
+                                <span>User Management</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item active">
+                            <a href="{% url 'admin_record_mealplan' %}" class="sidebar-link">
+                                <i class="fas fa-folder"></i>
+                                <span>Content Management</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'admin_logout' %}" class="sidebar-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Admin Dashboard</h3>
+                            <p class="text-subtitle text-muted">Recipe Records.</p>
+                        </div> 
+                    </div>
+                    <div class="text-strip">
+                        <div class="text-container">
+                            <a href="{% url 'admin_list_recipes' %}"><span>Recipe Management</span></a>
+                          <span>|</span>
+                          <a href="{% url 'admin_record_educontent' %}"><span>Educational Content</span></a>
+                          <span>|</span>
+                          <a href="{% url 'admin_contact_list' %}"><span>Feedback</span></a>
+                         
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="tyt">
+                            <div class="card-header len">
+                                Recipe's List
+                            </div>
+                            <div class="button_c">
+                                <a href="{% url 'admin_add_recipe' %}"><button><i class="fas fa-plus"></i> Add New Recipe</button></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Cuisine</th>
+                                        <th>Prep Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for recipe in recipes %}
+                                    <tr>
+                                        <td>{{ recipe.name }}</td>
+                                        <td>{{ recipe.category }}</td>
+                                        <td>{{ recipe.cuisine }}</td>
+                                        <td>{{ recipe.prep_time }} minutes</td>
+                                        <td>
+                                            <div class="action-buttons d-flex gap-1">
+                                                <a href="{% url 'admin_view_recipe' recipe.id %}" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-eye"></i> View
+                                                </a>
+                                                <a href="{% url 'admin_edit_recipe' recipe.id %}" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <form method="POST" action="{% url 'admin_delete_recipe' recipe.id %}" style="display: inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this recipe?')">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="5" class="text-center">No recipes found</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025&copy; School Project</p>
+                    </div>
+                   
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+<script>
+    function confirmDelete(username) {
+        return confirm(`Are you sure you want to delete the user: ${username}?`);
+    }
+</script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

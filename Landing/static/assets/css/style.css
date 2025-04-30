@@ -1,0 +1,138 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #1b2f45, #0e3d70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.container {
+  max-width: 450px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.container:hover {
+  transform: scale(1.02);
+}
+
+.container .form {
+  padding: 2rem;
+}
+
+.form header {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1b2f45;
+}
+
+.form input {
+  height: 55px;
+  width: 100%;
+  padding: 0 15px;
+  font-size: 16px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.form input:focus {
+  border-color: #1b2f45;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 149, 121, 0.1);
+}
+
+.form a {
+  font-size: 15px;
+  color: #009579;
+  text-decoration: none;
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.form a:hover {
+  text-decoration: underline;
+}
+
+.form input.button {
+  color: #fff;
+  background: #1b2f45;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+.form input.button:hover {
+  background: #1b2f45;
+  box-shadow: 0 5px 15px rgba(0, 123, 92, 0.3);
+}
+
+.signup {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #555;
+}
+
+.signup label {
+  color: #1b2f45;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.signup label:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .form header {
+    font-size: 1.8rem;
+  }
+
+  .form input {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .form input.button {
+    font-size: 1rem;
+  }
+
+  .signup {
+    font-size: 15px;
+  }
+}

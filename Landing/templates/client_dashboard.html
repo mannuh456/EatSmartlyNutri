@@ -1,0 +1,379 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bold.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo.jpg' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calendar-container {
+            width: 360px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        .calendar-container h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin: 10px 0;
+        }
+        .day {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .day.current {
+            background-color: #4caf50;
+            color: #fff;
+            font-weight: bold;
+        }
+        #current-day {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+        /* Profile image hover styles */
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .avatar-wrapper .camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        .avatar-wrapper:hover .camera-icon {
+            opacity: 1;
+        }
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            width: 300px;
+        }
+        .popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .upload-form input[type="file"] {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .upload-form button {
+            background-color: #435ebe;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .upload-form button:hover {
+            background-color: #334a9e;
+        }
+        .upload-form .delete-btn {
+            background-color: #dc3545;
+        }
+        .upload-form .delete-btn:hover {
+            background-color: #b02a37;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.jpg' %}" class="bin" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item active">
+                            <a href="{% url 'client_dashboard' %}" class="sidebar-link">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_recipe_list' %}" class="sidebar-link">
+                                <i class="fas fa-book-open"></i>
+                                <span>Recipe's</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_educontent_list' %}" class="sidebar-link">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Educational Content</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_bodymetric_view' %}" class="sidebar-link">
+                                <i class="fas fa-weight-scale"></i>
+                                <span>BodyMetrics</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_records' %}" class="sidebar-link">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Records</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_logout' %}" class="sidebar-link">
+                                <i class="fas fa-door-open"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            <div class="page-heading">
+                <h3>Client Dashboard</h3>
+                <p>Overview</p>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-9">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card" style="background-color: #8f98a1; border: none; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 12px;">
+                                    <div class="card-body d-flex align-items-center" style="padding: 30px; height: 400px; background-image: url('{% static 'assets/images/logo.jpg' %}); background-size: cover; background-position: center;">
+                                        <div style="flex: 1; text-align: center; background-color: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 10px;">
+                                            <h1 style="font-size: 28px; font-weight: 700; color: #435ebe; margin-bottom: 10px;">Welcome to EatNutri Dashboard!</h1>
+                                            <p style="font-size: 16px; color: #435ebe;">Explore meal plans, recipes, consultations, and educational content tailored to your needs. Let’s make healthy living easier!</p>
+                                            <a href="meal_plan.html" class="btn btn-success" style="margin-top: 20px; padding: 10px 20px; font-size: 16px; border-radius: 25px;">Get Started</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="fas fa-utensils"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Total Meal Plans</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <i class="fas fa-book-open"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Total Recipes</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="fas fa-user-md"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Ongoing Consultations</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="fas fa-chalkboard-teacher"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Upcoming Educational Content</h6>
+                                                <h6 class="font-extrabold mb-0">0</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card">
+                            <div class="card-body py-4 px-5">
+                                <div class="d-flex align-items-center flex-column">
+                                    <div class="avatar-wrapper">
+                                        <div class="avatar avatar-xl">
+                                            <img src="{% if profile.profile_image %}{{ profile.profile_image.url }}{% else %}{% static 'assets/images/faces/1.jpg' %}{% endif %}" alt="Profile Image">
+                                        </div>
+                                        <i class="fas fa-camera camera-icon" id="camera-icon"></i>
+                                    </div>
+                                    <div class="ms-3 name text-center">
+                                        <h5 class="font-bold">{{ request.user }}</h5>
+                                        <h6 class="text-muted mb-0">Last Login: {{ last_login|date:"D, d M Y H:i" }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calendar-container card">
+                            <h2>Calendar</h2>
+                            <div id="calendar"></div>
+                            <p id="current-day"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Popup and Overlay -->
+            <div class="overlay" id="popup-overlay"></div>
+            <div class="popup" id="upload-popup">
+                <h5>Update Profile Image</h5>
+                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                    {% csrf_token %}
+                    <input type="file" name="profile_image" accept="image/*" required>
+                    <button type="submit">Upload</button>
+                    {% if profile.profile_image %}
+                        <button type="submit" name="delete_image" class="delete-btn">Delete</button>
+                    {% endif %}
+                </form>
+            </div>
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 © School Project</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/apexcharts.js' %}"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendarElement = document.getElementById("calendar");
+            const currentDayElement = document.getElementById("current-day");
+            const today = new Date();
+            const currentDay = today.getDate();
+            const currentMonth = today.toLocaleString("default", { month: "long" });
+            const currentYear = today.getFullYear();
+            const daysInMonth = new Date(currentYear, today.getMonth() + 1, 0).getDate();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement("div");
+                dayElement.classList.add("day");
+                dayElement.textContent = day;
+                if (day === currentDay) {
+                    dayElement.classList.add("current");
+                }
+                calendarElement.appendChild(dayElement);
+            }
+            currentDayElement.textContent = `Today is ${today.toLocaleDateString("default", { weekday: "long" })}, ${currentDay} ${currentMonth} ${currentYear}`;
+
+            // Popup toggle logic
+            const cameraIcon = document.getElementById("camera-icon");
+            const popup = document.getElementById("upload-popup");
+            const overlay = document.getElementById("popup-overlay");
+
+            cameraIcon.addEventListener("click", () => {
+                popup.classList.add("active");
+                overlay.classList.add("active");
+            });
+
+            overlay.addEventListener("click", () => {
+                popup.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        });
+    </script>
+</body>
+</html>

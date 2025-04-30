@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Eat Smartly Nutri App</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/logo.jpg' %}" rel="icon">
+  <link href="{% static 'assets/img/logo.jpg' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}"  rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}"  rel="stylesheet">
+  <style>
+    .land{
+      border-radius: 55%;
+    }
+    #phone_ing{
+      border-radius: 45px;
+      margin-top: 45%;
+    }
+    .logoimg{
+      border-radius: 52px;
+      height: 100px;
+      width: 100px;
+      background-color: pink;
+    }
+  </style>
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{% static 'assets/img/logo.jpg' %}" class="logoimg" alt="">
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home<br></a></li>
+          <li><a href="#why-us">About Us</a></li>
+          <li><a href="#why-us">Benefits</a></li>
+          <li><a href="#why-us">How it works</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="{% url 'contact_page' %}">Contact Us</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="{% static 'assets/img/land.jpg' %}" alt="" data-aos="fade-in">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4">
+            <h1 data-aos="fade-up">Eat Smartly Nutri</h1>
+            <blockquote data-aos="fade-up" data-aos-delay="100">
+              <p>Discover personalized meal plans, traditional recipes, and expert advice tailored to help you live your best life</p>
+            </blockquote>
+            <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+              <a href="{% url 'register_user' %}" class="btn-get-started">Get Started</a>
+              <a href="{% url 'admin_login' %}"class="btn-get-started"><i class="bi bi-list"></i>Admin login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="why-us section">
+
+      <div class="container">
+
+        <div class="row g-0">
+
+          <div class="col-xl-5 img-bg" data-aos="fade-up" data-aos-delay="100">
+            <img src="{% static 'assets/img/land.jpg' %}" alt="" class="land">
+          </div>
+
+          <div class="col-xl-7 slides position-relative" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="swiper init-swiper">
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "centeredSlides": true,
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  },
+                  "navigation": {
+                    "nextEl": ".swiper-button-next",
+                    "prevEl": ".swiper-button-prev"
+                  }
+                }
+              </script>
+              <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                  <div class="item">
+                    <h3 class="mb-3">About Us</h3>
+                    <h4 class="mb-3">Why Choose Eat Smartly Nutri?</h4>
+                    <p>We aim to bridge the gap between traditional African diets and modern nutritional science to combat diet-related health issues like obesity and chronic diseases.</p>
+                  </div>
+                </div><!-- End slide item -->
+
+                <div class="swiper-slide">
+                  <div class="item">
+                    <h3 class="mb-3">Benefits</h3>
+                    <h4 class="mb-3">Why You’ll Love Eat Smartly Nutri </h4>
+                    <p>Easy to Use: Simple and intuitive interface for all age groups.</p>
+                    <p>Culturally Inclusive: Features African traditional diets alongside modern options.</p>
+                    <p>Health Focused: Designed to help combat chronic diseases and improve overall well-being.</p>
+                    <p>Continuous Updates: Always adding new recipes, tools, and insights.</p>
+                  </div>
+                </div><!-- End slide item -->
+
+                <div class="swiper-slide">
+                  <div class="item">
+                    <h3 class="mb-3">How it works?</h3>
+                    <p>Step 1: Create your profile by entering your details and goals.</p>
+                    <p>Step 2: Explore meal plans, recipes, and nutritional advice tailored to you.</p>
+                    <p>Step 3: Log your meals and track your progress.</p>
+                    <p>Step 4: Get expert advice to stay on track.</p>
+                  </div>
+                </div><!-- End slide item -->
+
+                
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Why Us Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Our Services</h2>
+        <p>What we offer our client's</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon flex-shrink-0"><i class="bi bi-briefcase" style="color: #f57813;"></i></div>
+            <div>
+              <h4 class="title">Personalized Nutrition Plans</h4>
+              <p class="description">Tailored diet recommendations based on your preferences and health goals.</p>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon flex-shrink-0"><i class="bi bi-card-checklist" style="color: #15a04a;"></i></div>
+            <div>
+              <h4 class="title">Food Database</h4>
+              <p class="description">Explore a comprehensive list of foods with nutritional breakdowns.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon flex-shrink-0"><i class="bi bi-bar-chart" style="color: #d90769;"></i></div>
+            <div>
+              <h4 class="title">Traditional and Modern Recipes</h4>
+              <p class="description">Get inspired with meals that combine tradition and health.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="icon flex-shrink-0"><i class="bi bi-binoculars" style="color: #15bfbc;"></i></div>
+            <div>
+              <h4 class="title">Progress Tracking</h4>
+              <p class="description">Monitor your daily intake and health goals through interactive graphs and charts.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon flex-shrink-0"><i class="bi bi-brightness-high" style="color: #f5cf13;"></i></div>
+            <div>
+              <h4 class="title">Expert Consultations</h4>
+              <p class="description">Connect with nutritionists and dieticians for personalized advice.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+         
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+  
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="mb-0">Powerful features</h3>
+            <h3>we offer</h3>
+
+            <div class="row gy-4">
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #ff8b2c;"></i>
+                  <span>Client Dashboard</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #5578ff;"></i>
+                  <span>Admin Dashboard</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #e80368;"></i>
+                  <span>Responsive Designs</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #ffa76e;"></i>
+                  <span>Personalized Data</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #11dbcf;"></i>
+                  <span>Security to your data</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+              <div class="col-md-6">
+                <div class="icon-list d-flex">
+                  <i class="bi bi-x-diamond" style="color: #4233ff;"></i>
+                  <span>Top notch Consultations</span>
+                </div>
+              </div><!-- End Icon List Item-->
+
+             
+            </div>
+          </div>
+          <div class="col-lg-5 position-relative" data-aos="zoom-out" data-aos-delay="200">
+            <div class="phone-wrap">
+              <img src="{% static 'assets/img/eat.jpg' %}" id="phone_ing" alt="Image" class="img-fluid">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="details">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <h4>Eat Smartly Nutri</h4>
+              <p>Discover personalized meal plans, traditional recipes, and expert advice tailored to help you live your best life</p>
+              <a href="{% url 'register_user' %}" class="btn-get-started">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Recent Posts Section -->
+   
+
+  </main>
+
+  <footer id="footer" class="footer light-background">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-about">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <span class="sitename">Eat Smartly Nutri</span>
+            </a>
+            <p>Discover personalized meal plans, traditional recipes, and expert advice tailored to help you live your best life</p>
+            <div class="social-links d-flex mt-4">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Benefits</a></li>
+              <li><a href="#">How it works</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><a href="#">Personalized Nutrition Plans</a></li>
+              <li><a href="#">Food Database</a></li>
+              <li><a href="#">Traditional & Modern Recipes</a></li>
+              <li><a href="#">Progress Tracking</a></li>
+              <li><a href="#">Expert Consultations</a></li>
+            </ul>
+          </div>
+
+          
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Eat Smartly Nutri</strong> <span>All Rights Reserved 2025</span></p>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

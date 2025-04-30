@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo.jpg' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+<style>
+    .meal-plan-detail {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .meal-plan-content {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .meal-plan-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .meal-plan-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: #435ebe;
+        margin-bottom: 15px;
+    }
+
+    .meal-plan-description {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .meal-plan-detail-value {
+        color: #333;
+        font-weight: 600;
+    }
+
+    .nutrition-goals,
+    .recipes-list {
+        list-style-type: none;
+        padding-left: 0;
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 25px;
+    }
+
+    .nutrition-goals li,
+    .recipes-list li {
+        margin-bottom: 8px;
+    }
+
+    .action-buttons button {
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 25px;
+        margin-top: 20px;
+    }
+
+    .action-buttons .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .action-buttons .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .action-buttons .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .action-buttons .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        .meal-plan-content {
+            padding: 20px;
+        }
+
+        .meal-plan-title {
+            font-size: 28px;
+        }
+
+        .meal-plan-description {
+            font-size: 16px;
+        }
+
+        .nutrition-goals li,
+        .recipes-list li {
+            font-size: 14px;
+        }
+    }
+</style>
+    
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.jpg' %}" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item active">
+                            <a href="{% url 'client_dashboard' %}" class="sidebar-link">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_recipe_list' %}" class="sidebar-link">
+                                <i class="fas fa-book-open"></i>
+                                <span>Recipe's</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_educontent_list' %}" class="sidebar-link">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Educational Content</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_bodymetric_view' %}" class="sidebar-link">
+                                <i class="fas fa-weight-scale"></i>
+                                <span>BodyMetrics</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_records' %}" class="sidebar-link">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Records</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_logout' %}" class="sidebar-link">
+                                <i class="fas fa-door-open"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Client Dashboard</h3>
+                <p>Meal Plans</p>
+            </div>
+            <div class="container meal-plan-detail">
+                <div class="meal-plan-content">
+                    <img src="{{ meal_plan.meal_plan_image.url }}" alt="Meal Plan Image" class="meal-plan-image">
+                    <h1 class="meal-plan-title">{{ meal_plan.meal_plan_title }}</h1>
+                    <p class="meal-plan-description">{{ meal_plan.description }}</p>
+                    <h3>Meal Type: <span class="meal-plan-detail-value">{{ meal_plan.meal_type }}</span></h3>
+                    <h3>Days: <span class="meal-plan-detail-value">{{ meal_plan.days|join:", " }}</span></h3>
+            
+                    <h3>Nutrition Goals:</h3>
+                    <ul class="nutrition-goals">
+                        <li>Calories: {{ meal_plan.calories_goal }} kcal</li>
+                        <li>Protein: {{ meal_plan.protein_goal }} g</li>
+                        <li>Carbs: {{ meal_plan.carbs_goal }} g</li>
+                        <li>Fats: {{ meal_plan.fat_goal }} g</li>
+                    </ul>
+            
+                    <h3>Recipes:</h3>
+                    <ul class="recipes-list">
+                        {% for recipe in meal_plan.recipes.all %}
+                        <li>{{ recipe.title }}</li>
+                        {% endfor %}
+                    </ul>
+            
+                    <div class="action-buttons">
+                        <button class="btn btn-success">Save Meal Plan</button>
+                        <button class="btn btn-primary">Download as PDF</button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; School Project</p>
+                    </div>
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/apexcharts.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+
+    <script src="assets/js/main1.js"></script>
+    
+</body>
+
+</html>

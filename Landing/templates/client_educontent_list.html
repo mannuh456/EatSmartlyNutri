@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/bold.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo.jpg' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .meal-plan-container {
+        text-align: center;
+        margin: 20px auto;
+    }
+    
+    .meal-plan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .meal-plan-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .meal-plan-card img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    
+    .meal-plan-detail {
+        max-width: 800px;
+        margin: 20px auto;
+        text-align: left;
+    }
+    
+    .meal-plan-detail img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .filter-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-form {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .filter-group label {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+    
+    .filter-group select {
+        width: 200px;
+        padding: 5px;
+    }
+    
+    .filter-form button {
+        padding: 5px 10px;
+    }
+    
+    .meal-plan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    </style>
+   
+    
+<style>
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .content-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .content-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .content-card h3 {
+        font-size: 24px;
+        color: #435ebe;
+        margin-bottom: 15px;
+    }
+
+    .content-card p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .content-card .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 25px;
+        margin-top: 10px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .content-card .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .content-card .btn-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .content-card .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .content-card .btn:hover {
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+        .content-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.jpg' %}" alt="Logo" srcset=""></a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_dashboard' %}" class="sidebar-link">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_recipe_list' %}" class="sidebar-link">
+                                <i class="fas fa-book-open"></i>
+                                <span>Recipe's</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item active">
+                            <a href="{% url 'client_educontent_list' %}" class="sidebar-link">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Educational Content</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_bodymetric_view' %}" class="sidebar-link">
+                                <i class="fas fa-weight-scale"></i>
+                                <span>BodyMetrics</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_records' %}" class="sidebar-link">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Records</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'client_logout' %}" class="sidebar-link">
+                                <i class="fas fa-door-open"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Client Dashboard</h3>
+                <p>Educational content's</p>
+            </div>
+            <div class="filter-bar">
+                <form method="GET" class="filter-form">
+                    <div class="filter-group">
+                        <label for="content_type">Content Type:</label>
+                        <select name="content_type" id="content_type" class="form-control">
+                            <option value="">All</option>
+                            {% for type in content_types %}
+                            <option value="{{ type.0 }}" {% if request.GET.content_type == type.0 %}selected{% endif %}>
+                                {{ type.1 }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="topic_category">Topic Category:</label>
+                        <select name="topic_category" id="topic_category" class="form-control">
+                            <option value="">All</option>
+                            {% for category in topic_categories %}
+                            <option value="{{ category.0 }}" {% if request.GET.topic_category == category.0 %}selected{% endif %}>
+                                {{ category.1 }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search">Search:</label>
+                        <input
+                            type="text"
+                            name="search"
+                            id="search"
+                            class="form-control"
+                            placeholder="Search by title or tags"
+                            value="{{ request.GET.search }}"
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="{% url 'client_educontent_list' %}" class="btn btn-secondary">Clear Filters</a>
+                </form>
+            </div>
+            
+            <div class="container content-container">
+                <div class="content-grid">
+                    {% for content in contents %}
+                    <div class="content-card">
+                        <h3>{{ content.content_title }}</h3>
+                        <p><strong>Type:</strong> {{ content.content_type }}</p>
+                        <p><strong>Category:</strong> {{ content.topic_category }}</p>
+                        <p>{{ content.description|truncatewords:20 }}</p>
+            
+                        {% if content.upload_file %}
+                        <a href="{{ content.upload_file.url }}" class="btn btn-success" download>Download</a>
+                        {% endif %}
+                        {% if content.content_link %}
+                        <a href="{{ content.content_link }}" class="btn btn-info" target="_blank">View Online</a>
+                        {% endif %}
+                        <a href="{% url 'client_educontent_detail' content.id %}" class="btn btn-primary">Read More</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2025 &copy; School Project</p>
+                    </div>
+                    
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/apexcharts.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+
+    <script src="assets/js/main1.js"></script>
+    
+</body>
+
+</html>

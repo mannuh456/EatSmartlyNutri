@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        /* Logo Styling */
+    .logo {
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    .logo img {
+      width: 100px; /* Adjust the size as needed */
+      height: auto;
+      border-radius: 50%; /* Optional: Makes the logo circular */
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for elegance */
+    }
+    
+      </style>
+</head>
+<body>
+    
+        <div class="container">
+            <!-- Logo Section -->
+            <div class="logo">
+              <img src="{% static 'assets/img/logo.jpg' %}" alt="Logo">
+            </div>    
+        
+        <div class="registration form">
+            <header>Signup</header>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="button" value="Signup">
+            </form>
+            <div class="signup">
+              <span class="signup">Already have an account?
+                <a href="{% url 'user_login' %}"><label>Login</label></a>
+              </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        /* Logo Styling */
+    .logo {
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    .logo img {
+      width: 100px; /* Adjust the size as needed */
+      height: auto;
+      border-radius: 50%; /* Optional: Makes the logo circular */
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for elegance */
+    }
+    
+      </style>
+</head>
+<body>
+    <div class="container">
+
+    <div class="logo">
+        <img src="{% static 'assets/img/logo.jpg' %}" alt="Logo">
+    </div>
+    <div class="login form">
+        <header>Admin Login</header>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username or Email</label>
+                {{ form.username }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="button" value="Login">
+            </div>
+
+          
+        </form>
+       
+      </div>
+      </div>
+</body>
+</html>

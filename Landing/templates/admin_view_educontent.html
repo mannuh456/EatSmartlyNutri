@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Content</title>
+    <style>
+        .content-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .content-container h1 {
+            margin-bottom: 20px;
+        }
+        .content-container p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <h1>{{ content.content_title }}</h1>
+        <p><strong>Description:</strong> {{ content.description }}</p>
+        <p><strong>Content Type:</strong> {{ content.content_type }}</p>
+        <p><strong>Category:</strong> {{ content.topic_category }}</p>
+
+        {% if content.upload_file %}
+        <p><strong>Uploaded File:</strong> <a href="{{ content.upload_file.url }}" target="_blank">Download File</a></p>
+        {% endif %}
+
+        {% if content.content_link %}
+        <p><strong>External Link:</strong> <a href="{{ content.content_link }}" target="_blank">{{ content.content_link }}</a></p>
+        {% endif %}
+
+        <p><strong>Tags:</strong> {{ content.tags }}</p>
+        <p><strong>Featured:</strong> {{ content.is_featured|yesno:"Yes,No" }}</p>
+
+        <div class="btn-container">
+            <a href="{% url 'admin_edit_educontent' content.pk %}" class="btn btn-primary">Edit</a>
+            <button id="delete-button" class="btn btn-danger">Delete</button>
+            <a href="{% url 'admin_record_educontent' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+<script>
+    document.getElementById('delete-button').addEventListener('click', function () {
+        if (confirm('Are you sure you want to delete this content? This action cannot be undone.')) {
+            console.log("Starting delete process...");
+            fetch("{% url 'admin_delete_educontent' content.pk %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                if (response.ok) {
+                    alert('Content deleted successfully.');
+                    window.location.href = "{% url 'admin_record_educontent' %}";  // Redirect to content list
+                } else {
+                    alert('Failed to delete content. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    });
+</script>
+</body>
+</html>
